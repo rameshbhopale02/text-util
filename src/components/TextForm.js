@@ -15,9 +15,35 @@ export default function TextForm(props) {
 
   const handleUpClick3 = () => {
     // let newText = text.clear();
+
     setText("");
   };
 
+  const handleUpClick4 = () => {
+    let newText = "";
+    let i = 0;
+    while (i < text.length && text[i] === " ") {
+      i++;
+    }
+
+    while (i < text.length) {
+      while (i < text.length && text[i] !== " ") {
+        newText += text[i];
+        i++;
+      }
+      if (i < text.length) {
+        newText += " ";
+      }
+      while (i < text.length && text[i] === " ") {
+        i++;
+      }
+    }
+
+    setText(newText);
+  };
+  
+
+ 
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
@@ -36,16 +62,30 @@ export default function TextForm(props) {
           ></textarea>
         </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "center" , gap: "10px"}}>
+      <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
         <button className="btn btn-primary" onClick={handleUpClick}>
           Convert to Uppercase
         </button>
-        <button className="btn btn-secondary" onClick={handleUpClick2}>
+        <button className="btn btn-primary" onClick={handleUpClick2}>
           Convert to Lowercase
         </button>
         <button className="btn btn-primary" onClick={handleUpClick3}>
           Clear Text
         </button>
+        <button className="btn btn-primary" onClick={handleUpClick4}>
+          remove Whitespaces
+        </button>
+      
+      </div>
+      <div className="container my-3">
+        <h1>Your text summary</h1>
+        <p>
+          {text.split(",").length} words and {text.length} characters{" "}
+        </p>
+
+        <p>{0.008 * text.split(" ").length} Minutes read</p>
+        <h2>Preview</h2>
+        <p>{text}</p>
       </div>
     </>
   );

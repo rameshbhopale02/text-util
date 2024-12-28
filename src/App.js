@@ -1,5 +1,5 @@
-// import logo from './logo.svg';
 import "./App.css";
+import About from "./components/About";
 import Navbar from "./components/navbar";
 import TextForm from "./components/TextForm";
 
@@ -11,6 +11,7 @@ function App() {
 
       <div className="container my-3">
         <TextForm title="Enter text to analyse" />
+        {/* <About /> */}
       </div>
     </>
   );

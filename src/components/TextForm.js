@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function TextForm(props) {
   const [text, setText] = useState("Enter your text here");
-
+  const [copied, setCopied] = useState(false);
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
@@ -14,8 +14,7 @@ export default function TextForm(props) {
   };
 
   const handleUpClick3 = () => {
-    // let newText = text.clear();
-
+   
     setText("");
   };
 
@@ -41,9 +40,29 @@ export default function TextForm(props) {
 
     setText(newText);
   };
-  
 
- 
+  const speak = () => {
+    let msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
+    const toogle = document.getElementById("toggle");
+    if (toogle.textContent == "Speak") {
+      toogle.innerHTML = "Stop";
+    } else {
+      toogle.innerHTML = "Speak";
+      if ((toogle.innerHTML = "Speak")) {
+        window.speechSynthesis.cancel();
+      }
+    }
+  };
+
+
+  const handleCopyClick = () => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => setCopied(true))
+      .catch((err) => console.error("failed to copy the text: " + err));
+  }; 
+
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
@@ -75,7 +94,18 @@ export default function TextForm(props) {
         <button className="btn btn-primary" onClick={handleUpClick4}>
           remove Whitespaces
         </button>
-      
+        <button
+          type="submit"
+          onClick={speak}
+          className="btn btn-primary"
+          id="toggle"
+        >
+          Speak
+        </button>
+
+        <button className="btn btn-primary mx-1" onClick={handleCopyClick}>
+          {copied ? "Copied" : "Copy to Clipboard"}
+        </button>
       </div>
       <div className="container my-3">
         <h1>Your text summary</h1>

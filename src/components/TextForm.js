@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-  const [text, setText] = useState("Enter your text here");
+  const [text, setText] = useState("");
   const [copied, setCopied] = useState(false);
   const handleUpClick = () => {
     let newText = text.toUpperCase();
@@ -12,7 +12,7 @@ export default function TextForm(props) {
   const handleUpClick2 = () => {
     let newText = text.toLocaleLowerCase();
     setText(newText);
-    // showAlert("Converted to LowerCase", "success");
+    //  ("Converted to LowerCase", "success");
   };
 
   const handleUpClick3 = () => {
@@ -48,7 +48,7 @@ export default function TextForm(props) {
     let msg = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(msg);
     const toogle = document.getElementById("toggle");
-    if (toogle.textContent == "Speak") {
+    if (toogle.textContent === "Speak") {
       toogle.innerHTML = "Stop";
     } else {
       toogle.innerHTML = "Speak";
@@ -117,9 +117,10 @@ export default function TextForm(props) {
       <div className="container my-3" style={{color: props.mode === 'dark' ? 'white' : 'black'}} >
         <h1>Your text summary</h1>
         <p>
-          {text.split(",").length} words and {text.length} characters{" "}
+          {/* {text.split(" ").length} words and {text.length} characters{" "} */}
+          <p>{text.split(" ").filter(word => word.trim() !== "").length} words, {text.length} Characters</p>   ``
         </p>
-
+ 
         <p>{0.008 * text.split(" ").length} Minutes read</p>
         <h2>Preview</h2>
         <p style={{border: '2px solid blue', padding: '5px' , textAlign: 'center'}}>{text}</p>

@@ -6,11 +6,13 @@ export default function TextForm(props) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    // showAlert("Converted to Uppercase", "success");
   };
 
   const handleUpClick2 = () => {
     let newText = text.toLocaleLowerCase();
     setText(newText);
+    // showAlert("Converted to LowerCase", "success");
   };
 
   const handleUpClick3 = () => {
@@ -39,6 +41,7 @@ export default function TextForm(props) {
     }
 
     setText(newText);
+    // showAlert("Text Cleared", "success");
   };
 
   const speak = () => {
@@ -59,9 +62,13 @@ export default function TextForm(props) {
   const handleCopyClick = () => {
     navigator.clipboard
       .writeText(text)
-      .then(() => setCopied(true))
-      .catch((err) => console.error("failed to copy the text: " + err));
-  }; 
+      .then(() => {
+        setCopied(true);
+        // showAlert("Text copied", "success"); // Call your alert function here
+      })
+      .catch((err) => console.error("Failed to copy the text: " + err));
+  };
+
 
   const handleOnChange = (event) => {
     setText(event.target.value);
